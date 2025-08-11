@@ -1,0 +1,50 @@
+{
+  "manifest_version": 3,
+  "name": "Voice Calendar Scheduler",
+  "version": "1.0.0",
+  "description": "A powerful voice-enabled calendar scheduling extension with recurring events and smart notifications",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs",
+    "notifications",
+    "background",
+    "scripting"
+  ],
+  "host_permissions": [
+    "http://localhost:5000/*",
+    "http://127.0.0.1:5000/*",
+    "https://*.replit.app/*"
+  ],
+  "background": {
+    "service_worker": "extension/background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "extension/popup.html",
+    "default_title": "Voice Calendar Scheduler",
+    "default_icon": {
+      "16": "extension/icons/icon16.png",
+      "48": "extension/icons/icon48.png",
+      "128": "extension/icons/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["extension/content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "extension/icons/icon16.png",
+    "48": "extension/icons/icon48.png",
+    "128": "extension/icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["extension/popup.html", "extension/popup.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
