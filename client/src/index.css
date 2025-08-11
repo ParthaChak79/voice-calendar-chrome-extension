@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0 0% 100%);
+  --foreground: hsl(210 25% 7.8431%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(210 25% 7.8431%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(210 25% 7.8431%);
+  --primary: hsl(207.2 89.2% 53.7%);
+  --primary-foreground: hsl(0 0% 100%);
+  --primary-50: hsl(207.2 100% 97.3%);
+  --primary-500: hsl(207.2 89.2% 53.7%);
+  --primary-700: hsl(207.7 89.8% 43.9%);
+  --primary-900: hsl(207.3 86.7% 29.0%);
+  --secondary: hsl(122.4 39.4% 49.2%);
+  --secondary-foreground: hsl(0 0% 100%);
+  --secondary-100: hsl(122.4 39.4% 85.0%);
+  --secondary-400: hsl(122.4 39.4% 65.0%);
+  --secondary-500: hsl(122.4 39.4% 49.2%);
+  --secondary-600: hsl(122.4 45.4% 38.0%);
+  --secondary-800: hsl(122.4 45.4% 25.0%);
+  --accent: hsl(14.3 87.5% 54.1%);
+  --accent-foreground: hsl(0 0% 100%);
+  --accent-500: hsl(14.3 87.5% 54.1%);
+  --muted: hsl(210 40% 98%);
+  --muted-foreground: hsl(215.4 16.3% 46.9%);
+  --destructive: hsl(0 84.2% 60.2%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(214.3 31.8% 91.4%);
+  --input: hsl(214.3 31.8% 91.4%);
+  --ring: hsl(207.2 89.2% 53.7%);
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: hsl(222.2 84% 4.9%);
+  --foreground: hsl(210 40% 98%);
+  --card: hsl(222.2 84% 4.9%);
+  --card-foreground: hsl(210 40% 98%);
+  --popover: hsl(222.2 84% 4.9%);
+  --popover-foreground: hsl(210 40% 98%);
+  --primary: hsl(207.2 89.2% 53.7%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(217.2 32.6% 17.5%);
+  --secondary-foreground: hsl(210 40% 98%);
+  --muted: hsl(217.2 32.6% 17.5%);
+  --muted-foreground: hsl(215 20.2% 65.1%);
+  --accent: hsl(217.2 32.6% 17.5%);
+  --accent-foreground: hsl(210 40% 98%);
+  --destructive: hsl(0 62.8% 30.6%);
+  --destructive-foreground: hsl(210 40% 98%);
+  --border: hsl(217.2 32.6% 17.5%);
+  --input: hsl(217.2 32.6% 17.5%);
+  --ring: hsl(207.2 89.2% 53.7%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Roboto', sans-serif;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.33);
+    opacity: 1;
+  }
+  80%, 100% {
+    transform: scale(2.33);
+    opacity: 0;
+  }
+}
+
+@keyframes voice-wave {
+  0% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(1.5);
+  }
+}
+
+.voice-active .voice-wave {
+  animation: voice-wave 0.4s ease-in-out infinite alternate;
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 1.5s infinite;
+}
+
+.animate-voice-wave {
+  animation: voice-wave 0.8s ease-in-out infinite alternate;
+}

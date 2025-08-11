@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voice Calendar Scheduler</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      width: 400px;
+      height: 600px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #ffffff;
+      overflow: hidden;
+    }
+
+    .loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      gap: 16px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid #e5e7eb;
+      border-top: 3px solid #3b82f6;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .error {
+      padding: 20px;
+      text-align: center;
+      color: #dc2626;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .error h3 {
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .error p {
+      font-size: 14px;
+      color: #6b7280;
+      margin-bottom: 15px;
+      line-height: 1.4;
+    }
+
+    .error button {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.2s;
+    }
+
+    .error button:hover {
+      background: #2563eb;
+    }
+
+    .error .debug-info {
+      margin-top: 20px;
+      padding: 10px;
+      background: #f3f4f6;
+      border-radius: 6px;
+      font-size: 12px;
+      color: #374151;
+      text-align: left;
+      max-width: 100%;
+      word-break: break-all;
+    }
+
+    #app-content {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #app-container {
+      width: 100%;
+      height: 100%;
+      border: none;
+      flex: 1;
+    }
+
+    .header {
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .header-icon {
+      width: 24px;
+      height: 24px;
+      background: #3b82f6;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 12px;
+    }
+
+    .header-title {
+      font-weight: 600;
+      color: #1e293b;
+      font-size: 16px;
+    }
+
+    .status-indicator {
+      margin-left: auto;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+    }
+
+    .status-indicator.error {
+      background: #ef4444;
+    }
+  </style>
+</head>
+<body>
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <p>Connecting to Calendar Server...</p>
+    <small style="color: #6b7280;">This may take a few moments</small>
+  </div>
+
+  <div class="error" id="error" style="display: none;">
+    <h3>⚠️ Connection Error</h3>
+    <p>Unable to connect to the calendar server.</p>
+    <div>
+      <p><strong>Troubleshooting steps:</strong></p>
+      <ol style="text-align: left; margin: 10px 0; font-size: 13px;">
+        <li>Make sure the server is running on port 5000</li>
+        <li>Check if you can access <code>http://localhost:5000</code> in your browser</li>
+        <li>Try running <code>npm run dev</code> in your project directory</li>
+      </ol>
+    </div>
+    <button id="retry-btn">🔄 Retry Connection</button>
+    <button id="open-server-btn" style="background: #6b7280; margin-left: 10px;">
+      🌐 Open Server
+    </button>
+    <div class="debug-info" id="debug-info" style="display: none;">
+      <strong>Debug Info:</strong><br>
+      <span id="debug-details"></span>
+    </div>
+  </div>
+
+  <div id="app-content" style="display: none;">
+    <div class="header">
+      <div class="header-icon">📅</div>
+      <div class="header-title">Voice Calendar</div>
+      <div class="status-indicator" id="status-indicator"></div>
+    </div>
+    <iframe id="app-container" src="" sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-modals allow-top-navigation"></iframe>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
